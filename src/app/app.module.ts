@@ -27,6 +27,9 @@ import { environment } from 'src/environments/environment';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { ReservationComponent } from './Components/reservation/reservation.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
+import { InfoComponent } from './Components/info/info.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
     DashboardComponent,
     ReservationComponent,
     NavbarComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +49,8 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
     AngularFireDatabaseModule,
     // AngularFireStorageModule,
     // AngularFirePerformanceModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

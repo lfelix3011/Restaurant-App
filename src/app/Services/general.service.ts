@@ -8,7 +8,7 @@ export class GeneralService {
 
   constructor(private http: HttpClient) { }
 
-  getOpenTableApi() {
-    return this.http.get('');
+  getOpenTableApi(url: string) {
+    return this.http.get('https://opentable.herokuapp.com/api/' + url);
   }
 }
