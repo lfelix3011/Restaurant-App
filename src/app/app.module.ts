@@ -30,6 +30,11 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { InfoComponent } from './Components/info/info.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AllReservationsComponent } from './Components/all-reservations/all-reservations.component';
+import { JwPaginationComponent } from 'jw-angular-pagination';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +43,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReservationComponent,
     NavbarComponent,
     InfoComponent,
+    AllReservationsComponent,
+    JwPaginationComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     // AngularFireStorageModule,
     // AngularFirePerformanceModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // NgbModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

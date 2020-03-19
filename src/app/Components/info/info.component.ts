@@ -8,7 +8,11 @@ import { GeneralService } from 'src/app/Services/general.service';
 })
 export class InfoComponent implements OnInit {
 
-  Data = [];
+  Data = {
+    countries: 0,
+    cities: 0,
+    restaurants: 0,
+  };
   url: string;
   constructor(private GeneralServ: GeneralService) { }
 
@@ -20,7 +24,7 @@ export class InfoComponent implements OnInit {
     this.url = 'stats';
     this.GeneralServ.getOpenTableApi(this.url).subscribe((e: any) => {
       console.log(e);
-      this.Data = e.restaurants;
+      this.Data = e;
     });
   }
 }

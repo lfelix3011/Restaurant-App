@@ -1,5 +1,6 @@
 .custom-card {
   height: 650px;
+  margin-bottom: 20px;
 }
 
 .custom-card-img {
@@ -8,4 +9,8 @@
 
 .custom-card-body {
   height: 250px;
+}
+
+.custom-pagination {
+  margin-top: 35px;
 }

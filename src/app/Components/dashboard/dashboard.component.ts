@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GeneralService } from 'src/app/Services/general.service';
+import { Router } from '@angular/router';
+// import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';n
 
 @Component({
   selector: 'app-dashboard',
@@ -9,32 +11,42 @@ import { GeneralService } from 'src/app/Services/general.service';
 })
 export class DashboardComponent implements OnInit {
   searchForm: FormGroup;
-  constructor(private GeneralServ: GeneralService, private formBuilder: FormBuilder) { }
-
+  constructor(private GeneralServ: GeneralService, private formBuilder: FormBuilder, private router: Router) {
+    // config.max = 5;, config: NgbRatingConfig
+  }
+  currentRate = 1;
   Data = [];
+  // pageOfItems = [];s
   countryList = [];
   cityList = [];
-  priceList = [];
+  obj = {
+    total_entries: 0,
+  };
   url: string;
   country: string;
   city: string;
   price: string;
-
+  pageSize = 15;
+  ActulPage = 1;
   ngOnInit() {
 
     this.searchForm = this.formBuilder.group({
       countryList: [''],
       cityList: [''],
-      priceList: [''],
     });
 
     this.CountryList();
     this.CityList();
+
+    this.url = 'restaurants?city=miami&&per_page=100';
+    console.log(this.ActulPage);
+    this.GetRestaurants(this.url);
   }
 
   GetRestaurants(param: string) {
     this.GeneralServ.getOpenTableApi(param).subscribe((e: any) => {
-      // console.log(e);
+      console.log(e);
+      this.obj = e;
       this.Data = e.restaurants;
     });
   }
@@ -45,7 +57,6 @@ export class DashboardComponent implements OnInit {
     this.GetRestaurants(this.url);
 
     this.searchForm.value.cityList = '';
-    this.CityList();
   }
 
   GetByCity(e: any) {
@@ -54,17 +65,11 @@ export class DashboardComponent implements OnInit {
     this.GetRestaurants(this.url);
 
     this.searchForm.value.countryList = '';
-    this.searchForm.value.priceList = '';
   }
 
-  // GetByPrice(e: any) {
-  //   this.price = e.srcElement.value;
-  //   this.url = 'restaurants?price=' + this.price;
-  //   this.GetRestaurants(this.url);
-
-  //   this.searchForm.value.countryList = '';
-  //   this.searchForm.value.cityList = '';
-  // }
+  getId(Id: number) {
+    this.router.navigate(['/Reservation/edit/' + Id]);
+  }
 
   CountryList() {
     this.url = 'countries';
@@ -86,5 +91,10 @@ export class DashboardComponent implements OnInit {
   //     this.cityList = e.cities;
   //   });
   // }
+
+  //   onChangePage(pageOfItems: any) {
+  //     // update current page of items
+  //     this.pageOfItems = pageOfItems;
+  //    }
 
 }

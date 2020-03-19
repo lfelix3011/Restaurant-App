@@ -2,7 +2,7 @@
   <div class="col-md-12 text-center mb-3">
     <h3>Filtrar Restaurantes</h3>
   </div>
-  <div class="form-group col-md-2">
+  <div class="form-group col-md-2 mr-auto">
     <label><strong>Selecionar Pais</strong></label>
     <div class="input-group">
       <div class="input-group-prepend">
@@ -25,14 +25,12 @@
     </div>
   </div>
 
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-3 mx-auto">
     <label><strong>Selecionar Ciudad</strong></label>
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text bg-white">
           <i class="fas fa-flag"></i>
-          <!-- <i class="fas fa-globe" [class.green-icon]="SectorId.valid"
-             [class.red-icon]="!isValid && SectorId.invalid && SectorId.touched && SectorId.untouched"></i> -->
         </div>
       </div>
       <select formControlName="cityList" (change)="GetByCity($event)" title="Selecionar Ciudad" name="Country"
@@ -40,34 +38,35 @@
         <option disabled selected value="">-Ciudades-</option>
         <option *ngFor="let item of cityList">{{item}}</option>
       </select>
-      <!-- <select (change)="getCountry($event)" title="Selecionar Pais" name="Country" class="form-control custom-select"
-         [class.is-invalid]="!isValid && service.formData.Id == 0">
-         <option disabled selected value="0">-Pais-</option>
-         <option *ngFor="let item of countryList" value="{{item.Id}}">{{item.countries}}</option>
-       </select> -->
     </div>
   </div>
 
-  <!-- <div class="form-group col-md-4">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <div class="input-group-text bg-white">
-          <i class="far fa-star"></i>
-        </div>
-      </div>
-      <select formControlName="priceList" (change)="GetByPrice($event)" title="Selecionar por Estrellas" name="Country"
-        class="form-control custom-select col-md-12">
-        <option *ngFor="let item of priceList">{{item}}</option>
-      </select>
-    </div>
+
+  <!-- <div class="ml-auto">
+    <ngb-rating [(rate)]="currentRate"></ngb-rating>
+    <pre>Rate: <b>{{currentRate}}</b></pre>
   </div> -->
+
+
 </form>
 
 <!-- <h5></h5> -->
 
 <div class="row">
-  <div class="col-md-3" *ngFor="let item of Data">
-    <div class="card custom-card m-1">
+  <div class="col-md-12 mx-auto ">
+    <!-- <jw-pagination [Data]="Data" (changePage)="onChangePage($event)"></jw-pagination> -->
+    <pagination-controls (pageChange)="ActulPage = $event"></pagination-controls>
+  </div>
+  <div class="col-md-12 mb-2">
+    <button type="button" class="btn btn-outline-dark col-md-6">
+      Total de Restaurantes Filtrados: <span class="badge badge-pill badge-light">{{obj.total_entries}}</span>
+    </button>
+    <button type="button" class="btn btn-dark col-md-6">
+      Total de Restaurantes por pagina: <span class="badge badge-pill badge-light">{{pageSize}}</span>
+    </button>
+  </div>
+  <div class="col-md-4" *ngFor="let item of Data | paginate: {itemsPerPage: pageSize, currentPage: ActulPage}">
+    <div class="card custom-card">
       <img [src]="item.image_url" class="card-img-top custom-card-img" [alt]="item.name">
       <div class="card-body custom-card-body">
         <h5 class="card-title">{{item.name}}</h5>
@@ -75,8 +74,9 @@
         <p class="card-text">{{item.country}} - {{item.area}}</p>
       </div>
       <div class="card-footer">
-        <a href="#" class="btn btn-block btn-primary ">Go somewhere</a>
+        <button class="btn btn-block btn-outline-primary" (click) = getId(item.id)>Ver Detalles</button>
       </div>
     </div>
   </div>
 </div>
+

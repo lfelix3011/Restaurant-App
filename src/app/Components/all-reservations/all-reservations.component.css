@@ -6,9 +6,8 @@
    padding-left: 0;
    padding-right: 0;
    box-shadow: 5px 5px #888888;
-   width: 800px;
 }
 
 .custom-card-footer {
-   height: 110px;
+   height: 80px;
 }

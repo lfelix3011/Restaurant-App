@@ -1,1 +1,26 @@
-<p>reservation works!</p>
+<div class="row">
+   <div class="col-md-12">
+      <h1 class="mx-auto text-center my-5">Detalles de: <span class="text-primary">{{Data.name}}</span></h1>
+   </div>
+   <div class="card mb-3 custom-card col-md-8 offset-md-2">
+      <div class="row no-gutters">
+        <div class="col-md-6">
+         <img class="card-img custom-img" [src]="Data.image_url" [alt]="Data.image_url">
+        </div>
+        <div class="col-md-6">
+         <div class="card-body">
+            <h3 class="card-title">Info relacionada</h3>
+            <p class="col-md-12"><span class="font-weight-bold">Direccion:</span> {{Data.address}}</p>
+            <p class="col-md-12"><span class="font-weight-bold">Pais:</span> {{Data.country}} - <span class="font-weight-bold">Ciudad:</span> {{Data.city}}</p>
+            <p class="col-md-12"><span class="font-weight-bold">Estado:</span> {{Data.state}}</p>
+            <p class="col-md-12"><span class="font-weight-bold">Telefono:</span> {{Data.phone}}</p>
+            <p class="col-md-12"><span class="font-weight-bold">Codigo Postal:</span> {{Data.postal_code}}</p>
+          </div>
+          <div class="card-footer custom-card-footer">
+            <button class="btn btn-block btn-outline-success mt-3" (click)=SaveReservation(Data)>Hacer Reservacion</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+</div>
