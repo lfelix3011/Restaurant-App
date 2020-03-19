@@ -19,9 +19,9 @@ export class AllReservationsComponent implements OnInit {
       this.itemRef = this.db.object('reservations');
       this.itemRef.snapshotChanges().subscribe(action => {
         const data = action.payload.val();
+        this.Data = [];
         // tslint:disable-next-line: forin
         for (const k in  data) {
-          // console.log(k);
           data[k].key = k ;
           console.log(data[k]);
           this.Data.push(data[k]);
@@ -29,10 +29,9 @@ export class AllReservationsComponent implements OnInit {
     });
   }
 
-  DeleteReservation(key: number, e) {
-    // console.log(e.toElement.parentElement.parentElement);
-    // console.log(e.toElement.parentElement.parentElement.parentElement.parentElement.remove());
+  DeleteReservation(key: number) {
+
     this.db.database.ref('reservations/' + key).remove();
-    e.toElement.parentElement.parentElement.parentElement.parentElement.remove();
+    // e.toElement.parentElement.parentElement.parentElement.parentElement.remove();
   }
 }

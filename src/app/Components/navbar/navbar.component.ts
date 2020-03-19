@@ -21,10 +21,10 @@ export class NavbarComponent implements OnInit {
     // console.log(this.itemRef);
     this.itemRef.snapshotChanges().subscribe(action => {
       const data = action.payload.val();
+      this.Data = [];
       // tslint:disable-next-line: align
       // tslint:disable-next-line: forin
       for (const k in  data) {
-        this.Data = []
         this.Data.push(data);
       }
       // console.log(data);

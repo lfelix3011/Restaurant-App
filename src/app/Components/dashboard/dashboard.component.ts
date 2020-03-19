@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
 
   GetByCountry(e: any) {
     this.country = e.srcElement.value;
-    this.url = 'restaurants?country=' + this.country;
+    this.url = 'restaurants?country=' + this.country + '&&per_page=100';
     this.GetRestaurants(this.url);
 
     this.searchForm.value.cityList = '';
@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
 
   GetByCity(e: any) {
     this.city = e.srcElement.value;
-    this.url = 'restaurants?city=' + this.city;
+    this.url = 'restaurants?city=' + this.city + '&&per_page=100';
     this.GetRestaurants(this.url);
 
     this.searchForm.value.countryList = '';

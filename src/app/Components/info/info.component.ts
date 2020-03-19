@@ -13,11 +13,23 @@ export class InfoComponent implements OnInit {
     cities: 0,
     restaurants: 0,
   };
+  AllData = [];
+
   url: string;
   constructor(private GeneralServ: GeneralService) { }
 
   ngOnInit() {
     this.getStats();
+
+    this.url = 'restaurants?city=ny&&per_page=5';
+    this.GetRestaurants(this.url);
+  }
+
+  GetRestaurants(param: string) {
+    this.GeneralServ.getOpenTableApi(param).subscribe((e: any) => {
+      console.log(e);
+      this.AllData = e.restaurants;
+    });
   }
 
   getStats() {

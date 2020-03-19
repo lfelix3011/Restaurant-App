@@ -1,6 +1,17 @@
 <div class="row">
    <h1 class="mx-auto my-5">Reservaciones Guardadas</h1>
 </div>
+<div class="col-md-6 offset-md-3" *ngIf="Data.length == 0" >
+  <div class="card border-dark mb-3">
+    <div class="card-header text-center"><h4>No tiene Reservaciones que Mostrar</h4></div>
+    <div class="card-body text-dark">
+      <h6 class="card-title text-center">Favor dirigirse a la pagina principal</h6>
+    </div>
+    <div class="card-footer custom-card-footer">
+      <button class="btn btn-block btn-outline-dark" [routerLink]="['/']">Buscar Reservacion</button>
+    </div>
+  </div>
+</div>
 <div class="card mb-3 custom-card col-md-8 offset-md-2" *ngFor="let item of Data" >
    <div class="row no-gutters">
      <div class="col-md-6">
@@ -14,11 +25,12 @@
          <p class="col-md-12"><span class="font-weight-bold">Estado:</span> {{item.state}}</p>
          <p class="col-md-12"><span class="font-weight-bold">Telefono:</span> {{item.phone}}</p>
          <p class="col-md-12"><span class="font-weight-bold">Codigo Postal:</span> {{item.postal_code}}</p>
+         <p class="col-md-12"><span class="font-weight-bold">Puntuacion:</span> {{item.price}} de 5</p>
          <!-- <p class="col-md-12"><span class="font-weight-bold">Fecha de Reservacion:</span> {{item.dateNow | date}}</p> -->
          <p [hidden]="item.key">{{item.key}}</p>
        </div>
        <div class="card-footer custom-card-footer">
-         <button class="btn btn-block btn-outline-danger mt-1" (click) ="DeleteReservation(item.key, $event)">Eliminar Reservacion</button>
+         <button class="btn btn-block btn-outline-danger mt-1" (click) ="DeleteReservation(item.key)">Eliminar Reservacion</button>
        </div>
      </div>
    </div>
