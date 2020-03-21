@@ -46,17 +46,17 @@
     <ngb-rating [(rate)]="currentRate"></ngb-rating>
     <pre>Rate: <b>{{currentRate}}</b></pre>
   </div> -->
-
+  <div class="col-md-6 ml-auto mt-4">
+    <!-- <jw-pagination [Data]="Data" (changePage)="onChangePage($event)"></jw-pagination> -->
+    <pagination-controls (pageChange)="ActulPage = $event"></pagination-controls>
+  </div>
 
 </form>
 
 <!-- <h5></h5> -->
 
 <div class="row">
-  <div class="col-md-12 mx-auto ">
-    <!-- <jw-pagination [Data]="Data" (changePage)="onChangePage($event)"></jw-pagination> -->
-    <pagination-controls (pageChange)="ActulPage = $event"></pagination-controls>
-  </div>
+ 
   <div class="col-md-12 mb-2">
     <button type="button" class="btn btn-outline-dark col-md-6">
       Total de Restaurantes Filtrados: <span class="badge badge-pill badge-light">{{obj.total_entries}}</span>

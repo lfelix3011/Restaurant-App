@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { GeneralService } from 'src/app/Services/general.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -10,14 +12,16 @@ export class NavbarComponent implements OnInit {
   itemRef: any;
   Data = [];
   index: number;
-  constructor(private db: AngularFireDatabase) { }
+  isLogged = false;
+  displayName: any;
+  constructor(private db: AngularFireDatabase, private GeneralServ: GeneralService, private userAuth: AngularFireAuth) { }
 
   ngOnInit() {
-    this.CountReservations();
+    this.getCurrentUser();
   }
 
-  CountReservations() {
-    this.itemRef = this.db.object('reservations');
+  CountReservations(uid: any) {
+    this.itemRef = this.db.object('Restaurants/Users/' + uid + '/Reservation');
     // console.log(this.itemRef);
     this.itemRef.snapshotChanges().subscribe(action => {
       const data = action.payload.val();
@@ -27,16 +31,26 @@ export class NavbarComponent implements OnInit {
       for (const k in  data) {
         this.Data.push(data);
       }
-      // console.log(data);
       console.log(this.Data.length);
-      // for (this.index = 0; this.index < this.Data.length; this.index++) {
-      //   console.log('Nav ' + this.index);
-      //   // this.index = 0;
-      // }
-      // console.log('Afuera  ' + this.index);
-
-    // console.log(data);
     });
+  }
+
+  getCurrentUser() {
+    this.GeneralServ.isAuth().subscribe(auth => {
+      if (auth) {
+        this.CountReservations(auth.uid);
+        this.displayName = auth.displayName;
+        // console.log(auth);
+        this.isLogged = true;
+      } else {
+        console.log('NOT user logged');
+        this.isLogged = false;
+      }
+    });
+  }
+
+  onLogout() {
+    this.userAuth.auth.signOut();
   }
 
 }

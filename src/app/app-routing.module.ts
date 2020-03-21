@@ -4,6 +4,8 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { InfoComponent } from './Components/info/info.component';
 import { ReservationComponent } from './Components/reservation/reservation.component';
 import { AllReservationsComponent } from './Components/all-reservations/all-reservations.component';
+import { RegisterComponent } from './Components/register/register.component';
+import { LoginComponent } from './Components/login/login.component';
 
 
 const routes: Routes = [
@@ -16,6 +18,9 @@ const routes: Routes = [
       { path: 'edit/:id', component: ReservationComponent },
     ]
   },
+  { path: 'Register', component: RegisterComponent },
+  { path: 'Login', component: LoginComponent },
+  { path: '**', component: LoginComponent },
 ];
 
 @NgModule({
