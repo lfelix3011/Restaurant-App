@@ -3,19 +3,26 @@
        <div class="col-12 col-sm-11 col-md-11 col-lg-5 col-xl-7">
            <div class="card">
                <div class="card-body">
+                    <div class="text-center">
+                        <i class="fas fa-user-shield display-1"></i> 
+                    </div>
                    <h1 class="text-center text-dark mt-3 ">Inicio de Sesion</h1>
                    <form class="mt-4" [formGroup]="registerForm">
-                       <div class="form-group">
-                           <label for="exampleInputEmail1">Email</label>
-                           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="userEmail">
-                           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                       </div>
-                       <div class="form-group">
-                           <label for="exampleInputPassword1">Contraseña</label>
-                           <input type="password" class="form-control" id="exampleInputPassword1" formControlName="userPassword">
-                       </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" id="userEmail" name="userEmail" formControlName="userEmail">
+                        <div *ngIf="registerFormControl.userEmail.invalid && (registerFormControl.userEmail.dirty || registerFormControl.userEmail.touched)" class="text-danger">
+                            <div *ngIf="registerFormControl.userEmail.errors.email">El Email no es valido.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Contraseña</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" id="userPassword" name="userPassword" formControlName="userPassword">
+                        <div *ngIf="registerFormControl.userPassword.invalid && (registerFormControl.userPassword.dirty || registerFormControl.userPassword.touched)" class="text-danger">
+                            <div *ngIf="registerFormControl.userPassword.errors.minlength">Nombre tiene que ser al menos 8 caracteres y maximo de 16.</div>
+                        </div>
+                    </div>
                    </form>
-                   <!-- <div class="loader" *ngIf="loading"></div> -->
                    <button class="btn btn-block btn-lg bg-dark text-white mt-4" [disabled]="registerForm.invalid" (click)="Login()">Inciar Sesion</button>
                </div>
            </div>

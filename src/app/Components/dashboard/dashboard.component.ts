@@ -12,11 +12,9 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   searchForm: FormGroup;
   constructor(private GeneralServ: GeneralService, private formBuilder: FormBuilder, private router: Router) {
-    // config.max = 5;, config: NgbRatingConfig
   }
   currentRate = 1;
   Data = [];
-  // pageOfItems = [];s
   countryList = [];
   cityList = [];
   obj = {
@@ -38,7 +36,7 @@ export class DashboardComponent implements OnInit {
     this.CountryList();
     this.CityList();
 
-    this.url = 'restaurants?city=miami&&per_page=100';
+    this.url = 'restaurants?city=indianapolis&&per_page=100';
     console.log(this.ActulPage);
     this.GetRestaurants(this.url);
   }
@@ -84,17 +82,5 @@ export class DashboardComponent implements OnInit {
       this.cityList = e.cities;
     });
   }
-
-  // PriceList() {
-  //   this.url = 'price';
-  //   this.GeneralServ.getOpenTableApi(this.url).subscribe((e: any) => {
-  //     this.cityList = e.cities;
-  //   });
-  // }
-
-  //   onChangePage(pageOfItems: any) {
-  //     // update current page of items
-  //     this.pageOfItems = pageOfItems;
-  //    }
 
 }

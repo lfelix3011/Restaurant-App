@@ -3,6 +3,7 @@ import { GeneralService } from 'src/app/Services/general.service';
 import { Router, ActivatedRoute, Data } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reservation',
@@ -33,7 +34,7 @@ export class ReservationComponent implements OnInit {
   isLogged = false;
   uid: any;
   constructor(private GeneralServ: GeneralService, private router: Router, private userAuth: AngularFireAuth,
-              private currentRoute: ActivatedRoute, private db: AngularFireDatabase) { }
+              private currentRoute: ActivatedRoute, private db: AngularFireDatabase, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getById();
@@ -67,6 +68,7 @@ export class ReservationComponent implements OnInit {
 
   SaveReservation(data: Data) {
     this.db.database.ref('Restaurants/Users/' + this.uid + '/Reservation').push(data);
+    this.toastr.success('Reservacion Agregada', 'Restaurant: ' + data.name);
     // this.db.database.ref('Restaurants/Users/' + this.uid + '/Reservation/' + data.key).push(this.todayDate);
     this.router.navigate(['/Reservation']);
     this.isLogged = true;

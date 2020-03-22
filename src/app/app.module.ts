@@ -37,6 +37,10 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
 import { RegisterComponent } from './Components/register/register.component';
 import { LoginComponent } from './Components/login/login.component';
 // import { AgmCoreModule } from '@agm/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { UserComponent } from './Components/user/user.component';
+import { UserEditComponent } from './Components/user/user-edit/user-edit.component';
 
 
 @NgModule({
@@ -50,6 +54,8 @@ import { LoginComponent } from './Components/login/login.component';
     JwPaginationComponent,
     RegisterComponent,
     LoginComponent,
+    UserComponent,
+    UserEditComponent,
 
   ],
   imports: [
@@ -68,6 +74,10 @@ import { LoginComponent } from './Components/login/login.component';
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyAUbeoemRzfrmiaK62WDlRJDSSPdC8eO0g'
     // }),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

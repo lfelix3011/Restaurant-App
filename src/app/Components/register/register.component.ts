@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,11 +14,14 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   itemRef: any;
-  // Variable para el formulario
-  constructor(private router: Router, private userAuth: AngularFireAuth, private db: AngularFireDatabase,
-              private formBuilder: FormBuilder) {
-
-      }
+  loading: boolean;
+  constructor(
+    private router: Router,
+    private userAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
+    ) { }
 
   ngOnInit() {
     // Inicializando formulario
@@ -27,12 +31,16 @@ export class RegisterComponent implements OnInit {
       userPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
     });
   }
-  async createUser() {
+
+  get registerFormControl() {
+    return this.registerForm.controls;
+  }
+   createUser() {
     const userName = this.registerForm.value.userName;
     const userEmail = this.registerForm.value.userEmail;
     const userPassword = this.registerForm.value.userPassword;
 
-    await this.userAuth.auth.createUserWithEmailAndPassword(userEmail, userPassword)
+    this.userAuth.auth.createUserWithEmailAndPassword(userEmail, userPassword)
     .then(() => {
       this.userAuth.auth.onAuthStateChanged((userData) => {
         userData.updateProfile({
@@ -43,7 +51,7 @@ export class RegisterComponent implements OnInit {
       const userID = this.userAuth.auth.currentUser.uid;
       const systemID = Date.now();
 
-      this.db.database.ref('Restaurants/Users/' + userID + '/').set({
+      this.db.database.ref('Restaurants/Users/' + userID + '/UserInfo/').set({
         // tslint:disable-next-line: object-literal-shorthand
         userName: userName,
         // tslint:disable-next-line: object-literal-shorthand
@@ -53,25 +61,24 @@ export class RegisterComponent implements OnInit {
         userEmail: userEmail,
       });
 
-      this.userAuth.auth.currentUser.sendEmailVerification();
-
-      alert('Registro exitoso');
-      this.router.navigate(['/Login']);
+      this.toastr.success('Registro exitoso');
+      this.toastr.info('Bienvenido ' + userName);
+      this.router.navigate(['/Dashboard']);
     })
     .catch((error) => {
       const errorCodes = error.code;
       switch (errorCodes) {
         case 'auth/invalid-email':
-          alert('Correo incorrecto');
+          this.toastr.error('Correo incorrecto');
           break;
         case 'auth/email-already-in-use':
-          alert('Correo utilizado');
+          this.toastr.error('Correo utilizado');
           break;
         case 'auth/operation-not-allowed':
-          alert('Lo sentimos falla interna en el sistema, fvor intentar luego o comunicarse con un representante.');
+          this.toastr.error('Lo sentimos falla interna en el sistema, fvor intentar luego o comunicarse con un representante');
           break;
         case 'auth/weak-password':
-          alert('Contraseña muy debil');
+          this.toastr.error('Contraseña muy debil');
           break;
       }
     });

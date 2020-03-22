@@ -6,6 +6,8 @@ import { ReservationComponent } from './Components/reservation/reservation.compo
 import { AllReservationsComponent } from './Components/all-reservations/all-reservations.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { LoginComponent } from './Components/login/login.component';
+import { UserComponent } from './Components/user/user.component';
+import { UserEditComponent } from './Components/user/user-edit/user-edit.component';
 
 
 const routes: Routes = [
@@ -20,6 +22,13 @@ const routes: Routes = [
   },
   { path: 'Register', component: RegisterComponent },
   { path: 'Login', component: LoginComponent },
+  {
+    path: 'User', children: [
+      { path: '', component: UserComponent },
+      { path: 'edit', component: UserEditComponent },
+      // { path: 'edit/:id', component: UserEditComponent },
+    ]
+  },
   { path: '**', component: LoginComponent },
 ];
 

@@ -1,0 +1,28 @@
+<div class="col-md-12 text-center mb-3">
+   <img src="../../../assets/img/Restaurant-Icon.png" alt="Restaurant" class="img-icon">
+  </div>
+<div class="card">
+   <div class="card-header">
+      <div class="row"> 
+         <div class="col-md-4 offset-md-4 text-center mt-1">
+            <span class="font-weight-bold">Nombre de Usuario:</span> {{Data.displayName}}
+         </div>
+        <div class="col-md-1 offset-md-3">
+         <button class="btn btn-info" [routerLink]="['/User/edit']"><i class="fas fa-user-edit"></i></button>
+         <!-- <button (click)="GetById(Data)" class="btn btn-info"><i class="fas fa-user-edit"></i></button> -->
+         </div>
+      </div>
+   </div>
+   <div class="card-body text-center">
+     <p class="card-text">Email: {{Data.email}}</p>
+     <button [routerLink]="['/Dashboard']" class="btn btn-dark">Buscar Reservacion</button>
+   </div>
+   <div class="card-footer text-muted text-center">
+      <div class="col-md-12">
+         Creacion de Registro: {{Data.metadata.creationTime | date}}
+      </div>
+      <div class="col-md-12">
+         Ultimo Inicio de Sesion: {{Data.metadata.lastSignInTime | date}}
+      </div>
+   </div>
+</div>

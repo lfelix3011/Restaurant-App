@@ -1,22 +1,35 @@
-<div class="container-fluid mt-5">
-    <div class="row justify-content-center pt-5">
+<div class="container-fluid">
+    <div class="row justify-content-center pt-3">
         <div class="col-12 col-sm-11 col-md-11 col-lg-5 col-xl-7">
             <div class="card">
                 <div class="card-body">
+                    <div class="text-center">
+                        <i class="fas fa-user display-1"></i> 
+                    </div>
+                    <div class="loader" *ngIf="loading"></div>
+
                     <h1 class="text-center text-dark mt-3 ">Registro</h1>
                     <form class="mt-4" [formGroup]="registerForm">
                         <div class="form-group">
                             <label for="exampleinpuText">Nombre de Usuario</label>
-                            <input type="text" class="form-control" id="exampleinpuText" aria-describedby="emailHelp" formControlName="userName">
+                            <input type="text" class="form-control" id="exampleinpuText" aria-describedby="emailHelp" id="userName" name="userName" formControlName="userName">
+                            <div *ngIf="registerFormControl.userName.invalid && (registerFormControl.userName.dirty || registerFormControl.userName.touched)" class="text-danger">
+                                <div *ngIf="registerFormControl.userName.errors.minlength">Nombre tiene que ser al menos 3 caracteres.</div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="userEmail">
-                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" id="userEmail" name="userEmail" formControlName="userEmail">
+                            <div *ngIf="registerFormControl.userEmail.invalid && (registerFormControl.userEmail.dirty || registerFormControl.userEmail.touched)" class="text-danger">
+                                <div *ngIf="registerFormControl.userEmail.errors.email">El Email no es valido.</div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Contraseña</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" formControlName="userPassword">
+                            <input type="password" class="form-control" id="exampleInputPassword1" id="userPassword" name="userPassword" formControlName="userPassword">
+                            <div *ngIf="registerFormControl.userPassword.invalid && (registerFormControl.userPassword.dirty || registerFormControl.userPassword.touched)" class="text-danger">
+                                <div *ngIf="registerFormControl.userPassword.errors.minlength">Nombre tiene que ser al menos 8 caracteres y maximo de 16.</div>
+                            </div>
                         </div>
                     </form>
                     <button class="btn btn-block btn-lg bg-dark text-white mt-4" [disabled]="registerForm.invalid" (click)="createUser()">Registrarme</button>

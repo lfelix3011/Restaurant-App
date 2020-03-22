@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { GeneralService } from 'src/app/Services/general.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -8,18 +9,34 @@ import { AngularFireAuth } from '@angular/fire/auth';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnChanges {
   itemRef: any;
   Data = [];
+  data = {
+    displayName: '',
+  };
+
   index: number;
   isLogged = false;
-  displayName: any;
-  constructor(private db: AngularFireDatabase, private GeneralServ: GeneralService, private userAuth: AngularFireAuth) { }
+  // displayName = '';
+  constructor(
+    private db: AngularFireDatabase,
+    private GeneralServ: GeneralService,
+    private userAuth: AngularFireAuth,
+    private toastr: ToastrService,
+    ) { }
 
   ngOnInit() {
     this.getCurrentUser();
+    // this.GeneralServ.getCurrentName().subscribe( (data) => {
+    //   this.displayName = data;
+    // });
+    console.log(this.GeneralServ.getCurrentName());
   }
 
+  ngOnChanges() {
+    this.getCurrentUser();
+  }
   CountReservations(uid: any) {
     this.itemRef = this.db.object('Restaurants/Users/' + uid + '/Reservation');
     // console.log(this.itemRef);
@@ -39,8 +56,8 @@ export class NavbarComponent implements OnInit {
     this.GeneralServ.isAuth().subscribe(auth => {
       if (auth) {
         this.CountReservations(auth.uid);
-        this.displayName = auth.displayName;
-        // console.log(auth);
+        // this.displayName = auth.displayName;
+        this.data = auth;
         this.isLogged = true;
       } else {
         console.log('NOT user logged');
@@ -50,6 +67,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogout() {
+    this.toastr.info('Adios');
     this.userAuth.auth.signOut();
   }
 

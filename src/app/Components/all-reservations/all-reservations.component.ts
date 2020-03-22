@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
 import { GeneralService } from 'src/app/Services/general.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-all-reservations',
@@ -13,7 +14,12 @@ export class AllReservationsComponent implements OnInit {
   Data = [];
   isLogged: boolean;
   uid: any;
-  constructor(private db: AngularFireDatabase, private router: Router, private GeneralServ: GeneralService) { }
+  constructor(
+    private db: AngularFireDatabase,
+    private router: Router,
+    private GeneralServ: GeneralService,
+    private toastr: ToastrService,
+  ) { }
 
   ngOnInit() {
     this.getCurrentUser();
@@ -45,8 +51,11 @@ export class AllReservationsComponent implements OnInit {
     });
   }
 
-  DeleteReservation(key: number) {
-    this.db.database.ref('Restaurants/Users/' + this.uid + '/Reservation/' + key).remove();
+  DeleteReservation(data: any) {
+    if(confirm('Estas seguro que quieres borrar la reservacion ?')){
+      this.db.database.ref('Restaurants/Users/' + this.uid + '/Reservation/' + data.key).remove();
+      this.toastr.warning('Registro Eliminado', 'Restaurant: ' + data.name );
+    }
   }
 
   GetById(Id: number) {

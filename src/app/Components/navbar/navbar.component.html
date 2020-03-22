@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" [routerLink]="['/Dashboard']" routerLinkActive="router-link-active"><i
-      class="fas fa-utensils"></i> Restaurant App</a>
+  <a class="navbar-brand" [routerLink]="['/Dashboard']" routerLinkActive="router-link-active">
+    <img src="../../../assets/img/Restaurant-Icon.png" alt="Restaurant" class="img-icon"> Restaurant App</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -9,15 +9,18 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/Info']">Info</a>
+        <a class="nav-link" [routerLink]="['/Info']"><img src="../../../assets/img/Restaurant_5.png" alt="Restaurant" class="img-icon">
+           Info</a>
       </li>
       <li class="nav-item" >
-        <a *ngIf="isLogged" class="nav-link" [routerLink]="['/Reservation']">Reservaciones <span class="badge badge-pill badge-light">{{Data.length}}</span></a>
-        <a *ngIf="!isLogged" class="nav-link" [routerLink]="['/Login']">Reservaciones <span class="badge badge-pill badge-light">0</span></a>
+        <a *ngIf="isLogged" class="nav-link" [routerLink]="['/Reservation']"> <img src="../../../assets/img/Restaurant_4.png" alt="Restaurant" class="img-icon"> 
+          Reservaciones <span class="badge badge-pill badge-light">{{Data.length}}</span></a>
+        <a *ngIf="!isLogged" class="nav-link" [routerLink]="['/Login']"> <img src="../../../assets/img/Restaurant_4.png" alt="Restaurant" class="img-icon"> 
+          Reservaciones <span class="badge badge-pill badge-light">0</span></a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <p *ngIf="isLogged" class="text-info mt-3 ml-2">{{displayName}}</p>
+      <a *ngIf="isLogged" class="text-info mx-5" [routerLink]="['/User']">{{data.displayName}}</a>
       <button *ngIf="!isLogged" class="btn btn-outline-dark" [routerLink]="['/Login']">Iniciar Sesion</button>
       <button  *ngIf="isLogged" class="btn btn-dark m-2" [routerLink]="['/Login']" (click)="onLogout()">Salir</button>
       <button *ngIf="!isLogged" class="btn btn-dark m-2" [routerLink]="['/Register']">Registrarse</button>

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { stringify } from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -25,4 +27,34 @@ export class GeneralService {
   isAuth() {
     return this.userAuth.authState.pipe(map(auth => auth));
   }
+
+  getCurrentName() {
+    return this.isAuth().pipe(map( auth => auth.displayName));
+  }
+
+  // getCurrentName(): string {
+  //   // let displayName = '';
+  //   this.isAuth().subscribe(auth => {
+  //     if (auth) {
+  //       return auth.displayName;
+  //     } else {
+  //       return '';
+  //     }
+  //   });
+  //   return '';
+  //   // return displayName;
+  // }
+
+  // getCurrentName() {
+  //   return this.isAuth().subscribe(auth => {
+  //     const name = auth.displayName.toString();
+  //     alert(name);
+  //     return name;
+  //   });
+  // }
+
+  // getCurrentName() {
+  //   return this.isAuth().subscribe();
+  // }
+
 }
