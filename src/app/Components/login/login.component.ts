@@ -33,8 +33,6 @@ export class LoginComponent implements OnInit {
 
     this.GeneralServ.loginEmailUser(userEmail, userPassword).then((res) => {
       this.toastr.info('Bienvenido');
-      // location.reload();
-      console.log(this.GeneralServ.getCurrentName());
       this.router.navigate(['/Dashboard']);
     }).catch((error) => {
       const errorCodes = error.code;

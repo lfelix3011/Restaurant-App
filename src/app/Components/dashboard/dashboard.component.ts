@@ -13,7 +13,6 @@ export class DashboardComponent implements OnInit {
   searchForm: FormGroup;
   constructor(private GeneralServ: GeneralService, private formBuilder: FormBuilder, private router: Router) {
   }
-  currentRate = 1;
   Data = [];
   countryList = [];
   cityList = [];
@@ -37,13 +36,11 @@ export class DashboardComponent implements OnInit {
     this.CityList();
 
     this.url = 'restaurants?city=indianapolis&&per_page=100';
-    console.log(this.ActulPage);
     this.GetRestaurants(this.url);
   }
 
   GetRestaurants(param: string) {
     this.GeneralServ.getOpenTableApi(param).subscribe((e: any) => {
-      console.log(e);
       this.obj = e;
       this.Data = e.restaurants;
     });

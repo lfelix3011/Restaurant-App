@@ -13,8 +13,12 @@ export class UserComponent implements OnInit {
     displayName: '',
     email: '',
     phoneNumber: '',
-    metadata: {}
   };
+
+  Data2: any;
+
+  creationTime: any;
+  lastSignInTime: any;
 
   isLogged: boolean;
   constructor(
@@ -29,18 +33,15 @@ export class UserComponent implements OnInit {
   getCurrentUser() {
     this.GeneralServ.isAuth().subscribe(auth => {
       if (auth) {
-        console.log(auth);
         this.Data = auth;
-        console.log('User logged');
+        this.Data2 = auth.metadata;
+        this.creationTime = auth.metadata.creationTime;
+        this.lastSignInTime = auth.metadata.lastSignInTime;
         this.isLogged = true;
       } else {
-        console.log('NOT user logged');
         this.isLogged = false;
       }
     });
   }
 
-  // GetById(data: any) {
-  //   this.router.navigate(['/User/edit/' + data]);
-  // }
 }

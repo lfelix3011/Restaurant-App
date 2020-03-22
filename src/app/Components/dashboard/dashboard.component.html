@@ -2,14 +2,12 @@
   <div class="col-md-12 text-center mb-3">
    <img src="../../../assets/img/Restaurant-Icon.png" alt="Restaurant" class="img-icon"> <h1 class="font-weight-bold">Buscar Restaurantes</h1>
   </div>
-  <div class="form-group col-md-2">
+  <div class="form-group col-md-2 col-sm-12">
     <label><strong>Selecionar Pais</strong></label>
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text bg-white">
           <i class="fas fa-globe"></i>
-          <!-- <i class="fas fa-globe" [class.green-icon]="SectorId.valid"
-              [class.red-icon]="!isValid && SectorId.invalid && SectorId.touched && SectorId.untouched"></i> -->
         </div>
       </div>
       <select formControlName="countryList" (change)="GetByCountry($event)" title="Selecionar Pais" id="Country"
@@ -17,15 +15,10 @@
         <option disabled selected value="">-Pais-</option>
         <option *ngFor="let item of countryList">{{item}}</option>
       </select>
-      <!-- <select (change)="getCountry($event)" title="Selecionar Pais" name="Country" class="form-control custom-select"
-          [class.is-invalid]="!isValid && service.formData.Id == 0">
-          <option disabled selected value="0">-Pais-</option>
-          <option *ngFor="let item of countryList" value="{{item.Id}}">{{item.countries}}</option>
-        </select> -->
     </div>
   </div>
 
-  <div class="form-group col-md-3 mr-auto">
+  <div class="form-group col-md-3 col-sm-12 mr-auto">
     <label><strong>Selecionar Ciudad</strong></label>
     <div class="input-group">
       <div class="input-group-prepend">
@@ -41,7 +34,7 @@
     </div>
   </div>
 
-  <div class="col-md-6 ml-auto mt-4">
+  <div class="col-md-6 ml-auto mt-4 col-sm-12">
     <pagination-controls (pageChange)="ActulPage = $event"></pagination-controls>
   </div>
 </form>
@@ -60,7 +53,7 @@
       <img [src]="item.image_url" class="card-img-top custom-card-img" [alt]="item.name">
       <div class="card-body custom-card-body">
         <h5 class="card-title">{{item.name}}</h5>
-        <p class="card-text">Direccion: {{item.address}}</p>
+        <p class="card-text texto">Direccion: {{item.address}}</p>
         <p class="card-text">{{item.country}} - {{item.area}}</p>
         <p class="card-texts">Puntuacion: {{item.price}} de 4</p>
       </div>

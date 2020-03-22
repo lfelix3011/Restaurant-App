@@ -25,6 +25,7 @@ export class ReservationComponent implements OnInit {
     postal_code: '',
     lat: '',
     lng: '',
+    reserve_url: '',
   };
   todayDate: Date = new Date();
   url: string;
@@ -43,11 +44,9 @@ export class ReservationComponent implements OnInit {
 
   getById() {
     const ItemId = this.currentRoute.snapshot.paramMap.get('id');
-    console.log(ItemId);
     if (ItemId != null) {
       this.url = 'restaurants/' + ItemId;
       this.GeneralServ.getOpenTableApi(this.url).subscribe((e: any) => {
-        // console.log(e);
         this.Data = e;
       });
     }
@@ -57,21 +56,24 @@ export class ReservationComponent implements OnInit {
     this.GeneralServ.isAuth().subscribe(auth => {
       if (auth) {
         this.uid = auth.uid;
-        console.log(this.uid);
         this.isLogged = true;
       } else {
-        console.log('NOT user logged');
         this.isLogged = false;
       }
     });
   }
 
-  SaveReservation(data: Data) {
+   SaveReservation(data: Data) {
+    data.reserve_url = this.todayDate.toString();
     this.db.database.ref('Restaurants/Users/' + this.uid + '/Reservation').push(data);
     this.toastr.success('Reservacion Agregada', 'Restaurant: ' + data.name);
-    // this.db.database.ref('Restaurants/Users/' + this.uid + '/Reservation/' + data.key).push(this.todayDate);
     this.router.navigate(['/Reservation']);
     this.isLogged = true;
+  }
+
+  GoToLogin() {
+    this.router.navigate(['/Login']);
+    this.toastr.info('No hay Usuario, por favor Inicie Sesion');
   }
 
 }

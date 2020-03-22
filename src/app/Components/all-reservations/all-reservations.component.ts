@@ -45,7 +45,6 @@ export class AllReservationsComponent implements OnInit {
         // tslint:disable-next-line: forin
         for (const k in  data) {
           data[k].key = k ;
-          // console.log(data[k]);
           this.Data.push(data[k]);
         }
     });

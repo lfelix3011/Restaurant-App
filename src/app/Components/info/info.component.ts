@@ -27,7 +27,6 @@ export class InfoComponent implements OnInit {
 
   GetRestaurants(param: string) {
     this.GeneralServ.getOpenTableApi(param).subscribe((e: any) => {
-      console.log(e);
       this.AllData = e.restaurants;
     });
   }
@@ -35,7 +34,6 @@ export class InfoComponent implements OnInit {
   getStats() {
     this.url = 'stats';
     this.GeneralServ.getOpenTableApi(this.url).subscribe((e: any) => {
-      console.log(e);
       this.Data = e;
     });
   }

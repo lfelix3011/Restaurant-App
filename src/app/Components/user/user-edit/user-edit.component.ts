@@ -38,7 +38,6 @@ export class UserEditComponent implements OnInit {
   ngOnInit() {
     this.getCurrentUser();
 
-    // console.log('Init ' + this.Data);
     this.registerForm = this.formBuilder.group({
       displayName: [this.Data.userName],
     });
@@ -49,14 +48,12 @@ export class UserEditComponent implements OnInit {
     this.itemRef.snapshotChanges().subscribe(action => {
       const data = action.payload.val();
       this.Data = data.UserInfo;
-      console.log(this.Data);
     });
   }
 
   getCurrentUser() {
     this.GeneralServ.isAuth().subscribe(auth => {
       if (auth) {
-        console.log(auth);
         this.getCurrentUserData(auth.uid);
         // this.Data = auth;
         this.isLogged = true;
@@ -67,19 +64,12 @@ export class UserEditComponent implements OnInit {
   }
 
   updateData() {
-    console.log(this.user);
     const { uid } = this.userAuth.auth.currentUser;
-    console.log(this.registerForm.value);
-    // this.db.database.ref('Restaurants/Users/' + uid + '/UserInfo').update(this.registerForm.value);
     this.userAuth.auth.currentUser.updateProfile({
       displayName: this.registerForm.value.displayName
     }).then( (suc) => {
       this.toastr.success('Nombre Actualizado');
       this.router.navigate(['/User']);
-      // location.reload();
-      // setTimeout(() => {
-      //   this.loading = true;
-      // }, 3000);
     }).catch( (err) => {
       this.toastr.error('Error al Actualizar');
     });

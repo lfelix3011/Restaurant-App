@@ -28,33 +28,4 @@ export class GeneralService {
     return this.userAuth.authState.pipe(map(auth => auth));
   }
 
-  getCurrentName() {
-    return this.isAuth().pipe(map( auth => auth.displayName));
-  }
-
-  // getCurrentName(): string {
-  //   // let displayName = '';
-  //   this.isAuth().subscribe(auth => {
-  //     if (auth) {
-  //       return auth.displayName;
-  //     } else {
-  //       return '';
-  //     }
-  //   });
-  //   return '';
-  //   // return displayName;
-  // }
-
-  // getCurrentName() {
-  //   return this.isAuth().subscribe(auth => {
-  //     const name = auth.displayName.toString();
-  //     alert(name);
-  //     return name;
-  //   });
-  // }
-
-  // getCurrentName() {
-  //   return this.isAuth().subscribe();
-  // }
-
 }

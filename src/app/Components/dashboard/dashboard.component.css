@@ -15,6 +15,11 @@
   margin-top: 35px;
 }
 
+.texto {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 .img-icon{
   height: 150px;

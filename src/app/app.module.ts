@@ -33,7 +33,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AllReservationsComponent } from './Components/all-reservations/all-reservations.component';
-import { JwPaginationComponent } from 'jw-angular-pagination';
 import { RegisterComponent } from './Components/register/register.component';
 import { LoginComponent } from './Components/login/login.component';
 // import { AgmCoreModule } from '@agm/core';
@@ -51,7 +50,6 @@ import { UserEditComponent } from './Components/user/user-edit/user-edit.compone
     NavbarComponent,
     InfoComponent,
     AllReservationsComponent,
-    JwPaginationComponent,
     RegisterComponent,
     LoginComponent,
     UserComponent,

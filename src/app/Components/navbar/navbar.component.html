@@ -15,7 +15,7 @@
       <li class="nav-item" >
         <a *ngIf="isLogged" class="nav-link" [routerLink]="['/Reservation']"> <img src="../../../assets/img/Restaurant_4.png" alt="Restaurant" class="img-icon"> 
           Reservaciones <span class="badge badge-pill badge-light">{{Data.length}}</span></a>
-        <a *ngIf="!isLogged" class="nav-link" [routerLink]="['/Login']"> <img src="../../../assets/img/Restaurant_4.png" alt="Restaurant" class="img-icon"> 
+        <a *ngIf="!isLogged" class="nav-link" (click) = GoToLogin()> <img src="../../../assets/img/Restaurant_4.png" alt="Restaurant" class="img-icon"> 
           Reservaciones <span class="badge badge-pill badge-light">0</span></a>
       </li>
     </ul>
